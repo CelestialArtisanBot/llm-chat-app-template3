@@ -12,34 +12,28 @@
       <h1 class="glyph-title">💬 Midnight Glyph Machine</h1>
     </header>
 
-    <main>
-      <!-- 🗣️ Central Chat Interface -->
-      <section id="chat-interface">
-        <div id="chat-log"></div>
-        <div id="chat-input-row">
-          <input type="text" id="chat-input" placeholder="Speak your glyph..." />
-          <button onclick="submitIncantation()">🔊 Send</button>
-        </div>
-      </section>
+    <section id="chat-box">
+      <div id="chat-log"></div>
+      <div id="chat-input-row">
+        <input type="text" id="chat-input" placeholder="Speak your glyph..." />
+        <button onclick="submitIncantation()">🔊 Send</button>
+      </div>
+    </section>
 
-      <!-- 🧩 Function Buttons -->
-      <section id="function-buttons">
-        <button onclick="triggerImageGen()">🖼️ Generate Image</button>
-        <button onclick="invokeGlyph('charge')">⚡ Force Phase: Charge</button>
-        <button onclick="toggleTracepad()">📜 Show Tracepad</button>
-        <button onclick="injectLore()">📖 Inject Lore</button>
-      </section>
+    <section id="function-buttons">
+      <button onclick="triggerImageGen()">🖼️ Generate Image</button>
+      <button onclick="invokeGlyph('charge')">⚡ Force Phase: Charge</button>
+      <button onclick="toggleTracepad()">📜 Show Tracepad</button>
+      <button onclick="injectLore()">📖 Inject Lore</button>
+    </section>
 
-      <!-- 📜 Tracepad Log -->
-      <section id="tracepad-panel" class="hidden">
-        <div id="tracepad-log"></div>
-      </section>
+    <section id="tracepad-panel" class="hidden">
+      <div id="tracepad-log"></div>
+    </section>
 
-      <!-- 📖 Lore Display -->
-      <section id="lore-panel">
-        <pre id="lore-text">📖 Lore will appear here...</pre>
-      </section>
-    </main>
+    <section id="lore-panel">
+      <pre id="lore-text">📖 Lore will appear here...</pre>
+    </section>
 
     <footer>
       <p>🎮 Pick of Gods — Phase Engine v1.0</p>
@@ -48,4 +42,4 @@
     <script type="module" src="./chat.js"></script>
   </div>
 </body>
-</html>
+  </html>
