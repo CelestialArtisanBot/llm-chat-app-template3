@@ -2,26 +2,27 @@ import tracepad from './modules/tracepad.js';
 import loreLoader from './modules/lore-loader.js';
 import imageGen from './modules/image-gen.js';
 
-const phaseLabel = document.getElementById('phase-label');
-const tracepadLog = document.getElementById('tracepad-log');
-const loreText = document.getElementById('lore-text');
 const chatLog = document.getElementById('chat-log');
+const loreText = document.getElementById('lore-text');
+const tracepadLog = document.getElementById('tracepad-log');
 
 function logUserMessage(content) {
   const msg = document.createElement('div');
   msg.className = 'chat-msg user';
   msg.textContent = `🗣️ ${content}`;
   chatLog.appendChild(msg);
+  chatLog.scrollTop = chatLog.scrollHeight;
 }
 
 function updateAIMessage(content) {
-  let aiMsg = document.querySelector('.chat-msg.ai');
-  if (!aiMsg) {
+  let aiMsg = document.querySelector('.chat-msg.ai:last-of-type');
+  if (!aiMsg || aiMsg.dataset.locked === "true") {
     aiMsg = document.createElement('div');
     aiMsg.className = 'chat-msg ai';
     chatLog.appendChild(aiMsg);
   }
   aiMsg.textContent = `🤖 ${content}`;
+  chatLog.scrollTop = chatLog.scrollHeight;
 }
 
 function getLastUserMessage() {
@@ -63,10 +64,7 @@ window.submitIncantation = async function () {
 
 window.invokeGlyph = function (phase) {
   tracepad.setPhase(phase);
-  const entry = document.createElement('div');
-  entry.className = 'trace-entry';
-  entry.textContent = `🔮 Phase invoked: ${phase} @ ${new Date().toLocaleTimeString()}`;
-  tracepadLog.appendChild(entry);
+  tracepad.logEvent(`🔮 Phase override: ${phase}`);
 };
 
 window.toggleTracepad = function () {
