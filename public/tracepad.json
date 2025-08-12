@@ -1,80 +1,53 @@
-/**
- * Tracepad — Ritual Event Logger
- * Logs glyph triggers, shard-phase transitions, and lore overlays.
- */
-
-// Internal ritual log
-const traceLog = [];
-
-/**
- * Logs a ritual event to the tracepad
- * @param {Object} event - Ritual event object
- * @param {string} event.phase - Current shard-phase (e.g. "glyph-channeling")
- * @param {string} event.glyph - Glyph symbol (e.g. "⟁")
- * @param {string} event.message - User message that triggered the glyph
- * @param {string} event.overlay - Lore overlay or oracle response
- */
-function logRitualEvent({ phase, glyph, message, overlay }) {
-  const entry = {
-    timestamp: new Date().toISOString(),
-    phase,
-    glyph,
-    message,
-    overlay,
-  };
-
-  traceLog.push(entry);
-  console.log("📜 Tracepad entry:", entry);
-}
-
-/**
- * Returns all logged ritual events
- * @returns {Array} Array of ritual event objects
- */
-function getTraceLog() {
-  return [...traceLog];
-}
-
-/**
- * Clears the tracepad log
- */
-function clearTraceLog() {
-  traceLog.length = 0;
-  console.log("🧹 Tracepad cleared.");
-}
-
-/**
- * Finds all events by glyph
- * @param {string} glyph - Glyph symbol to filter by
- * @returns {Array} Array of matching ritual events
- */
-function findEventsByGlyph(glyph) {
-  return traceLog.filter((entry) => entry.glyph === glyph);
-}
-
-/**
- * Finds all events by shard-phase
- * @param {string} phase - Shard-phase to filter by
- * @returns {Array} Array of matching ritual events
- */
-function findEventsByPhase(phase) {
-  return traceLog.filter((entry) => entry.phase === phase);
-}
-
-// Export for use in other modules
-export {
-  logRitualEvent,
-  getTraceLog,
-  clearTraceLog,
-  findEventsByGlyph,
-  findEventsByPhase,
-};
-
-{
-  "timestamp": "2025-08-12T18:07:00Z",
-  "ritual": "glyph:midnight-sigil",
-  "shard_phase": "initiation",
-  "description": "Embedded the Midnight Glyph sigil into the README as a symbolic invocation of the dashboard's lore-binding intent.",
-  "glyph_id": "🜁🜂🜃🜄",
-  "tags": ["sigil", "initiation", "lore", "visual"]
-}
+[
+  {
+    "timestamp": "2025-08-12T18:07:00Z",
+    "ritual": "glyph:midnight-sigil",
+    "shard_phase": "initiation",
+    "glyph": "🜁🜂🜃🜄",
+    "message": "README glyph embedded",
+    "overlay": "Midnight Glyph sigil activated",
+    "glyph_id": "🜁🜂🜃🜄",
+    "description": "Embedded the Midnight Glyph sigil into the README as a symbolic invocation of the dashboard's lore-binding intent.",
+    "tags": ["sigil", "initiation", "lore", "visual"]
+  },
+  {
+    "timestamp": "2025-08-12T18:08:12Z",
+    "ritual": "shard:air-stream",
+    "shard_phase": "streaming",
+    "glyph": "🜁",
+    "message": "User asked: 'What is the meaning of glyph 🜁?'",
+    "overlay": "🜁 represents breath, invocation, and the unseen wind of transmission.",
+    "tags": ["air", "streaming", "symbolism"],
+    "meaning": "Breath of invocation"
+  },
+  {
+    "timestamp": "2025-08-12T18:09:45Z",
+    "ritual": "shard:fire-response",
+    "shard_phase": "activation",
+    "glyph": "🜂",
+    "message": "User triggered: 'Generate glyph image'",
+    "overlay": "🜂 ignites the response. Fire shard activated for visual synthesis.",
+    "tags": ["fire", "activation", "image"],
+    "meaning": "Spark of response"
+  },
+  {
+    "timestamp": "2025-08-12T18:10:27Z",
+    "ritual": "shard:earth-log",
+    "shard_phase": "logging",
+    "glyph": "🜃",
+    "message": "Tracepad entry saved",
+    "overlay": "🜃 grounds the ritual. Memory etched into the ledger.",
+    "tags": ["earth", "logging", "memory"],
+    "meaning": "Foundation of memory"
+  },
+  {
+    "timestamp": "2025-08-12T18:11:03Z",
+    "ritual": "shard:water-flow",
+    "shard_phase": "flow",
+    "glyph": "🜄",
+    "message": "User navigated to chat UI",
+    "overlay": "🜄 flows through the interface. Emotion and interaction merge.",
+    "tags": ["water", "flow", "ui"],
+    "meaning": "Emotion and UI flow"
+  }
+]
