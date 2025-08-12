@@ -9,37 +9,34 @@
 <body>
   <div id="glyph-console">
     <header>
-      <h1 class="glyph-title">🕹️ Midnight Glyph Machine</h1>
-      <div id="tab-buttons">
-        <button onclick="toggleTab('chat')">💬 Chat</button>
-        <button onclick="toggleTab('phase')">🪐 Phase</button>
-        <button onclick="toggleTab('tracepad')">📜 Tracepad</button>
-        <button onclick="toggleTab('lore')">📖 Lore</button>
-      </div>
+      <h1 class="glyph-title">💬 Midnight Glyph Machine</h1>
     </header>
 
     <main>
-      <section id="chat-tab" class="tab active">
-        <div id="chat-window">
-          <div id="chat-log"></div>
-          <input type="text" id="chat-input" placeholder="Type incantation..." />
+      <!-- 🗣️ Central Chat Interface -->
+      <section id="chat-interface">
+        <div id="chat-log"></div>
+        <div id="chat-input-row">
+          <input type="text" id="chat-input" placeholder="Speak your glyph..." />
           <button onclick="submitIncantation()">🔊 Send</button>
         </div>
       </section>
 
-      <section id="phase-tab" class="tab">
-        <p>Current Phase: <span id="phase-label">init</span></p>
-        <button onclick="invokeGlyph('init')">🪐 Init</button>
-        <button onclick="invokeGlyph('charge')">⚡ Charge</button>
-        <button onclick="invokeGlyph('surge')">🔥 Surge</button>
+      <!-- 🧩 Function Buttons -->
+      <section id="function-buttons">
+        <button onclick="triggerImageGen()">🖼️ Generate Image</button>
+        <button onclick="invokeGlyph('charge')">⚡ Force Phase: Charge</button>
+        <button onclick="toggleTracepad()">📜 Show Tracepad</button>
+        <button onclick="injectLore()">📖 Inject Lore</button>
       </section>
 
-      <section id="tracepad-tab" class="tab">
+      <!-- 📜 Tracepad Log -->
+      <section id="tracepad-panel" class="hidden">
         <div id="tracepad-log"></div>
-        <button onclick="clearTracepad()">🧹 Clear</button>
       </section>
 
-      <section id="lore-tab" class="tab">
+      <!-- 📖 Lore Display -->
+      <section id="lore-panel">
         <pre id="lore-text">📖 Lore will appear here...</pre>
       </section>
     </main>
@@ -47,8 +44,8 @@
     <footer>
       <p>🎮 Pick of Gods — Phase Engine v1.0</p>
     </footer>
-  </div>
 
-  <script type="module" src="./chat.js"></script>
+    <script type="module" src="./chat.js"></script>
+  </div>
 </body>
 </html>
