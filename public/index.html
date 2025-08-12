@@ -1,33 +1,48 @@
 <!DOCTYPE html>
-<html lang="en" data-phase="init">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Midnight Glyph Machine</title>
   <link rel="stylesheet" href="./style.css" />
-  <link rel="stylesheet" href="./assets/fonts/fonts.css" />
 </head>
 <body>
   <div id="glyph-console">
     <header>
       <h1 class="glyph-title">🕹️ Midnight Glyph Machine</h1>
-      <p class="phase-indicator">Phase: <span id="phase-label">init</span></p>
+      <div id="tab-buttons">
+        <button onclick="toggleTab('chat')">💬 Chat</button>
+        <button onclick="toggleTab('phase')">🪐 Phase</button>
+        <button onclick="toggleTab('tracepad')">📜 Tracepad</button>
+        <button onclick="toggleTab('lore')">📖 Lore</button>
+      </div>
     </header>
 
-    <section id="glyph-field">
-      <div id="tracepad-log"></div>
-    </section>
+    <main>
+      <section id="chat-tab" class="tab active">
+        <div id="chat-window">
+          <div id="chat-log"></div>
+          <input type="text" id="chat-input" placeholder="Type incantation..." />
+          <button onclick="submitIncantation()">🔊 Send</button>
+        </div>
+      </section>
 
-    <section id="glyph-controls">
-      <button onclick="invokeGlyph('init')">🪐 Glyph Base</button>
-      <button onclick="invokeGlyph('charge')">⚡ Charge Pulse</button>
-      <button onclick="invokeGlyph('surge')">🔥 Overdrive Glyph</button>
-      <button onclick="clearTracepad()">🧹 Clear Tracepad</button>
-    </section>
+      <section id="phase-tab" class="tab">
+        <p>Current Phase: <span id="phase-label">init</span></p>
+        <button onclick="invokeGlyph('init')">🪐 Init</button>
+        <button onclick="invokeGlyph('charge')">⚡ Charge</button>
+        <button onclick="invokeGlyph('surge')">🔥 Surge</button>
+      </section>
 
-    <section id="lore-display">
-      <pre id="lore-text"></pre>
-    </section>
+      <section id="tracepad-tab" class="tab">
+        <div id="tracepad-log"></div>
+        <button onclick="clearTracepad()">🧹 Clear</button>
+      </section>
+
+      <section id="lore-tab" class="tab">
+        <pre id="lore-text">📖 Lore will appear here...</pre>
+      </section>
+    </main>
 
     <footer>
       <p>🎮 Pick of Gods — Phase Engine v1.0</p>
