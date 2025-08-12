@@ -2,24 +2,31 @@
 
 Each phase inscribed in the tracepad is a glyph echo—  
 a timestamped pulse of transformation,  
-a record of the dashboard’s living memory.  
+a record of the dashboard’s living memory.
 
 To change phase is to invoke a glyph.  
 To log it is to ritualize the shift.  
+To read it is to witness the echo.
 
-init → Glyph Base: quiet stability  
-charge → Charge Pulse: rising momentum  
-surge → Overdrive Glyph: full ignition  
+─── PHASES ───
 
-The tracepad does not forget.  
-It listens. It echoes. It binds.
+init   → Glyph Base       :: quiet stability  
+charge → Charge Pulse     :: rising momentum  
+surge  → Overdrive Glyph  :: full ignition
 
-🧮 Phase Map:
-- init: 400 — Glyph Base
-- charge: 500 — Charge Pulse
-- surge: 700 — Overdrive Glyph
+─── PHASE MAP ───
 
-🧙 Invocation:
+🧮 init   → 400 — Glyph Base  
+⚡ charge → 500 — Charge Pulse  
+🔥 surge  → 700 — Overdrive Glyph
+
+─── INVOCATION ───
+
 When the shard shifts, the glyph responds.  
 When the glyph pulses, the tracepad listens.  
 When the tracepad logs, the ritual is complete.
+
+The tracepad does not forget.  
+It listens.  
+It echoes.  
+It binds.
