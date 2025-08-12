@@ -1,35 +1,36 @@
 <!DOCTYPE html>
-<html lang="en" data-phase="sigil-awakening">
+<html lang="en" data-phase="init">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pick of Gods — Ritual Chat</title>
+  <title>Midnight Glyph Machine</title>
   <link rel="stylesheet" href="./style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./assets/fonts/fonts.css" />
 </head>
 <body>
-  <div id="chat-container">
-    <div id="chat-messages">
-      <div class="message assistant-message">
-        <p>🌌 Welcome to the Ritual Interface. Your glyphs echo through the pinball ether. What shall we awaken?</p>
-      </div>
-    </div>
+  <div id="glyph-console">
+    <header>
+      <h1 class="glyph-title">🕹️ Midnight Glyph Machine</h1>
+      <p class="phase-indicator">Phase: <span id="phase-label">init</span></p>
+    </header>
 
-    <textarea id="user-input" rows="1" placeholder="Type your rune..."></textarea>
-    <button id="send-button">Send</button>
-    <div id="typing-indicator"></div>
+    <section id="glyph-field">
+      <div id="tracepad-log"></div>
+    </section>
 
-    <div id="function-bar">
-      <button class="function-button" onclick="clearChat()">🧹 Clear</button>
-      <button class="function-button" onclick="shiftPhase()">🔄 Phase Shift</button>
-      <button class="function-button" onclick="summonGlyph()">✨ Summon Glyph</button>
-      <button class="function-button" onclick="exportShard()">📦 Export Shard</button>
-      <button class="function-button" onclick="toggleLore()">📜 Toggle Lore</button>
-    </div>
+    <section id="glyph-controls">
+      <button onclick="invokeGlyph('init')">🪐 Glyph Base</button>
+      <button onclick="invokeGlyph('charge')">⚡ Charge Pulse</button>
+      <button onclick="invokeGlyph('surge')">🔥 Overdrive Glyph</button>
+      <button onclick="clearTracepad()">🧹 Clear Tracepad</button>
+    </section>
 
-    <footer class="lore-footer">
-      <p>🎮 Pick of Gods — Midnight Glyph Machine © 2025</p>
-      <p><em>Shard Registry:</em> <span id="shard-count">1 active shard</span></p>
+    <section id="lore-display">
+      <pre id="lore-text"></pre>
+    </section>
+
+    <footer>
+      <p>🎮 Pick of Gods — Phase Engine v1.0</p>
     </footer>
   </div>
 
