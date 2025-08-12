@@ -1,0 +1,3 @@
+def generate_video(...):
+    ...
+generate_video.__ritual__ = "video_from_image_prompt"
