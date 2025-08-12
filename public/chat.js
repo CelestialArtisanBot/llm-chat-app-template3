@@ -1,38 +1,26 @@
-const input = document.getElementById('user-input');
-const sendBtn = document.getElementById('send-button');
-const messages = document.getElementById('chat-messages');
-const typingIndicator = document.getElementById('typing-indicator');
+// 🕹️ chat.js — Glyph Console Controller
+import tracepad from './modules/tracepad.js';
+import loreLoader from './modules/lore-loader.js';
 
-sendBtn.addEventListener('click', () => {
-  const text = input.value.trim();
-  if (!text) return;
+const phaseLabel = document.getElementById('phase-label');
+const tracepadLog = document.getElementById('tracepad-log');
+const loreText = document.getElementById('lore-text');
 
-  appendMessage(text, 'user');
-  input.value = '';
-  simulateResponse(text);
-});
+window.invokeGlyph = function (phase) {
+  tracepad.setPhase(phase);
+  phaseLabel.textContent = phase;
 
-function appendMessage(text, sender) {
-  const msg = document.createElement('div');
-  msg.className = `message ${sender}-message`;
-  msg.innerHTML = `<p>${text}</p>`;
-  messages.appendChild(msg);
-  messages.scrollTop = messages.scrollHeight;
-}
+  const entry = document.createElement('div');
+  entry.className = 'trace-entry';
+  entry.textContent = `🔮 Phase invoked: ${phase} @ ${new Date().toLocaleTimeString()}`;
+  tracepadLog.appendChild(entry);
 
-function simulateResponse(userText) {
-  typingIndicator.classList.add('visible');
-  setTimeout(() => {
-    typingIndicator.classList.remove('visible');
-    appendMessage(`🔮 Echo received: "${userText}"`, 'assistant');
-  }, 1000);
-}
-
-// Ritual Functions
-window.clearChat = () => {
-  messages.innerHTML = '';
+  loreLoader.load('tracepad-echoes', '#lore-text');
 };
 
-window.shiftPhase = () => {
-  const phases = ['sigil-awakening', 'glyph-channeling', 'oracle-reflection'];
-  const html =
+window.clearTracepad = function () {
+  tracepadLog.innerHTML = '';
+  loreText.textContent = '';
+  phaseLabel.textContent = 'init';
+  tracepad.setPhase('init');
+};
