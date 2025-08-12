@@ -1,0 +1,9 @@
+/* 🔥 Orbitron Bold — Multiball Surge Phase */
+@font-face {
+  font-family: 'Orbitron';
+  src: url('./Orbitron-Bold.woff2') format('woff2'),
+       url('./Orbitron-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
