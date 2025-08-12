@@ -1,70 +1,62 @@
 /**
- * LLM Chat Application Template
+ * Midnight Glyph Machine — Ritual Interpreter
  *
- * A simple chat application using Cloudflare Workers AI.
- * This template demonstrates how to implement an LLM-powered chat interface with
- * streaming responses using Server-Sent Events (SSE).
+ * A modular glyph interpreter using Cloudflare Workers AI.
+ * Supports lore-aware prompts, phase logic, and streaming responses via SSE.
  *
  * @license MIT
  */
 import { Env, ChatMessage } from "./types";
 
-// Model ID for Workers AI model
-// https://developers.cloudflare.com/workers-ai/models/
 const MODEL_ID = "@cf/meta/llama-3.3-70b-instruct-fp8-fast";
 
-// Default system prompt
-const SYSTEM_PROMPT =
-  "You are a helpful, friendly assistant. Provide concise and accurate responses.";
+// 🧠 Base system prompt (can be layered with phase/lore)
+const BASE_PROMPT = `You are a glyph interpreter inside the Midnight Glyph Machine.
+Respond with symbolic clarity, modular logic, and shard-aware insight.
+Use concise, ritualistic phrasing.`;
 
 export default {
-  /**
-   * Main request handler for the Worker
-   */
-  async fetch(
-    request: Request,
-    env: Env,
-    ctx: ExecutionContext,
-  ): Promise<Response> {
+  async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
     const url = new URL(request.url);
 
-    // Handle static assets (frontend)
+    // Serve frontend assets
     if (url.pathname === "/" || !url.pathname.startsWith("/api/")) {
       return env.ASSETS.fetch(request);
     }
 
-    // API Routes
+    // Chat API route
     if (url.pathname === "/api/chat") {
-      // Handle POST requests for chat
       if (request.method === "POST") {
-        return handleChatRequest(request, env);
+        return handleGlyphRequest(request, env);
       }
-
-      // Method not allowed for other request types
       return new Response("Method not allowed", { status: 405 });
     }
 
-    // Handle 404 for unmatched routes
     return new Response("Not found", { status: 404 });
   },
 } satisfies ExportedHandler<Env>;
 
 /**
- * Handles chat API requests
+ * Handles glyph chat requests
  */
-async function handleChatRequest(
-  request: Request,
-  env: Env,
-): Promise<Response> {
+async function handleGlyphRequest(request: Request, env: Env): Promise<Response> {
   try {
-    // Parse JSON request body
-    const { messages = [] } = (await request.json()) as {
+    const { messages = [], phase = "init", lore = "" } = (await request.json()) as {
       messages: ChatMessage[];
+      phase?: string;
+      lore?: string;
     };
 
-    // Add system prompt if not present
+    // 🧩 Construct layered system prompt
+    const layeredPrompt = [
+      BASE_PROMPT,
+      `Current Phase: ${phase}`,
+      lore ? `Lore Fragment: ${lore}` : "",
+    ].join("\n\n");
+
+    // Inject system prompt if missing
     if (!messages.some((msg) => msg.role === "system")) {
-      messages.unshift({ role: "system", content: SYSTEM_PROMPT });
+      messages.unshift({ role: "system", content: layeredPrompt });
     }
 
     const response = await env.AI.run(
@@ -75,21 +67,14 @@ async function handleChatRequest(
       },
       {
         returnRawResponse: true,
-        // Uncomment to use AI Gateway
-        // gateway: {
-        //   id: "YOUR_GATEWAY_ID", // Replace with your AI Gateway ID
-        //   skipCache: false,      // Set to true to bypass cache
-        //   cacheTtl: 3600,        // Cache time-to-live in seconds
-        // },
       },
     );
 
-    // Return streaming response
     return response;
   } catch (error) {
-    console.error("Error processing chat request:", error);
+    console.error("Glyph Interpreter Error:", error);
     return new Response(
-      JSON.stringify({ error: "Failed to process request" }),
+      JSON.stringify({ error: "Failed to invoke glyph" }),
       {
         status: 500,
         headers: { "content-type": "application/json" },
