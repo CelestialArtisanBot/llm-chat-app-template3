@@ -1,56 +1,23 @@
-// 📜 tracepad.js — Ritual phase tracker and incantation logger
+let phase = "default";
+const tracepadLog = document.getElementById('tracepad-log');
 
-let currentPhase = "init";
-const tracepadLog = document.getElementById("tracepad-log");
+function logEvent(entry) {
+  const line = document.createElement('div');
+  line.textContent = entry;
+  tracepadLog.appendChild(line);
+  tracepadLog.scrollTop = tracepadLog.scrollHeight;
+}
 
-const tracepad = {
-  /**
-   * Set the current ritual phase
-   * @param {string} phase
-   */
-  setPhase(phase) {
-    currentPhase = phase;
-    tracepad.logEvent(`🔮 Phase set to "${phase}"`);
-  },
+function logIncantation(spell) {
+  logEvent(`🧙 ${spell}`);
+}
 
-  /**
-   * Get the current ritual phase
-   * @returns {string}
-   */
-  getPhase() {
-    return currentPhase;
-  },
+function setPhase(newPhase) {
+  phase = newPhase;
+}
 
-  /**
-   * Log a user incantation with timestamp and phase
-   * @param {string} spell
-   */
-  logIncantation(spell) {
-    const entry = document.createElement("div");
-    entry.className = "trace-entry";
-    entry.textContent = `🗣️ Incantation: "${spell}" @ ${new Date().toLocaleTimeString()} [${currentPhase}]`;
-    tracepadLog.appendChild(entry);
-  },
+function getPhase() {
+  return phase;
+}
 
-  /**
-   * Log a generic tracepad event
-   * @param {string} message
-   */
-  logEvent(message) {
-    const entry = document.createElement("div");
-    entry.className = "trace-entry";
-    entry.textContent = `${message} @ ${new Date().toLocaleTimeString()} [${currentPhase}]`;
-    tracepadLog.appendChild(entry);
-  },
-
-  /**
-   * Clear the tracepad log and reset phase
-   */
-  clear() {
-    tracepadLog.innerHTML = "";
-    currentPhase = "init";
-    tracepad.logEvent("🧹 Tracepad cleared");
-  },
-};
-
-export default tracepad;
+export default { logEvent, logIncantation, setPhase, getPhase };
