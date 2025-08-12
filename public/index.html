@@ -4,121 +4,31 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Pick of Gods — Ritual Chat</title>
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      font-family: 'Courier New', monospace;
-      background: radial-gradient(circle, #1a1a1a, #000);
-      color: #eee;
-      transition: background 1s ease;
-    }
-
-    body[data-phase="glyph-channeling"] {
-      background: linear-gradient(to bottom, #2c003e, #000);
-    }
-
-    body[data-phase="oracle-reflection"] {
-      background: linear-gradient(to top, #003e2c, #000);
-    }
-
-    #chat-container {
-      display: flex;
-      flex-direction: column;
-      height: 100vh;
-      padding: 1em;
-      box-sizing: border-box;
-    }
-
-    #chat-messages {
-      flex: 1;
-      overflow-y: auto;
-      padding: 1em;
-      border: 2px solid #00ffff;
-      border-radius: 8px;
-      background-color: #0a0f1c;
-      margin-bottom: 1em;
-    }
-
-    .message {
-      margin: 0.5em 0;
-      padding: 0.5em;
-      border-radius: 4px;
-      max-width: 80%;
-    }
-
-    .user-message {
-      background-color: #001f2f;
-      align-self: flex-end;
-      margin-left: auto;
-      color: #9ef;
-    }
-
-    .assistant-message {
-      background-color: #002b3f;
-      align-self: flex-start;
-      color: #f9f;
-    }
-
-    #user-input {
-      width: 100%;
-      resize: none;
-      padding: 0.75em;
-      font-size: 1em;
-      border: 1px solid #00ffff;
-      border-radius: 4px;
-      background: #222;
-      color: #eee;
-    }
-
-    #send-button {
-      margin-top: 0.5em;
-      padding: 0.5em 1em;
-      background: #87ceeb;
-      color: #000;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-
-    #typing-indicator.visible::after {
-      content: "⟁ Channeling...";
-      animation: pulse 1.5s infinite;
-      color: #ccc;
-      font-style: italic;
-      display: block;
-      margin-top: 0.5em;
-    }
-
-    @keyframes pulse {
-      0% { opacity: 0.3; }
-      50% { opacity: 1; }
-      100% { opacity: 0.3; }
-    }
-
-    .lore-footer {
-      text-align: center;
-      font-size: 0.9em;
-      color: #888;
-      padding-top: 1em;
-    }
-  </style>
+  <link rel="stylesheet" href="./style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet" />
 </head>
 <body>
   <div id="chat-container">
     <div id="chat-messages">
       <div class="message assistant-message">
-        <p>Greetings, mortal. I am Pick of Gods—an oracle woven from shards and symbols. What wisdom do you seek?</p>
+        <p>🌌 Welcome to the Ritual Interface. Your glyphs echo through the pinball ether. What shall we awaken?</p>
       </div>
     </div>
 
-    <textarea id="user-input" rows="1" placeholder="Speak your query into the ether..."></textarea>
+    <textarea id="user-input" rows="1" placeholder="Type your rune..."></textarea>
     <button id="send-button">Send</button>
     <div id="typing-indicator"></div>
 
+    <div id="function-bar">
+      <button class="function-button" onclick="clearChat()">🧹 Clear</button>
+      <button class="function-button" onclick="shiftPhase()">🔄 Phase Shift</button>
+      <button class="function-button" onclick="summonGlyph()">✨ Summon Glyph</button>
+      <button class="function-button" onclick="exportShard()">📦 Export Shard</button>
+      <button class="function-button" onclick="toggleLore()">📜 Toggle Lore</button>
+    </div>
+
     <footer class="lore-footer">
-      <p>Pick of Gods — Ritual Chat Interface © 2025</p>
+      <p>🎮 Pick of Gods — Midnight Glyph Machine © 2025</p>
       <p><em>Shard Registry:</em> <span id="shard-count">1 active shard</span></p>
     </footer>
   </div>
