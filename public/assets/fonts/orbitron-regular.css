@@ -1,0 +1,9 @@
+/* 🌀 Orbitron Regular — Idle Coil Phase */
+@font-face {
+  font-family: 'Orbitron';
+  src: url('./Orbitron-Regular.woff2') format('woff2'),
+       url('./Orbitron-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
