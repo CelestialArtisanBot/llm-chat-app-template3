@@ -69,3 +69,11 @@ export {
   findEventsByGlyph,
   findEventsByPhase,
 };
+{
+  "timestamp": "2025-08-12T18:07:00Z",
+  "ritual": "glyph:midnight-sigil",
+  "shard_phase": "initiation",
+  "description": "Embedded the Midnight Glyph sigil into the README as a symbolic invocation of the dashboard's lore-binding intent.",
+  "glyph_id": "🜁🜂🜃🜄",
+  "tags": ["sigil", "initiation", "lore", "visual"]
+}
