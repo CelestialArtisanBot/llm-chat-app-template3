@@ -5,11 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Pick of Gods — Ritual Chat</title>
   <style>
-    body {
+    html, body {
       margin: 0;
+      padding: 0;
+      height: 100%;
       font-family: 'Courier New', monospace;
-      color: #eee;
       background: radial-gradient(circle, #1a1a1a, #000);
+      color: #eee;
       transition: background 1s ease;
     }
 
@@ -26,34 +28,45 @@
       flex-direction: column;
       height: 100vh;
       padding: 1em;
+      box-sizing: border-box;
     }
 
     #chat-messages {
       flex: 1;
       overflow-y: auto;
-      padding-bottom: 1em;
+      padding: 1em;
+      border: 2px solid #00ffff;
+      border-radius: 8px;
+      background-color: #0a0f1c;
+      margin-bottom: 1em;
     }
 
     .message {
       margin: 0.5em 0;
+      padding: 0.5em;
+      border-radius: 4px;
+      max-width: 80%;
     }
 
-    .user-message p {
-      text-align: right;
+    .user-message {
+      background-color: #001f2f;
+      align-self: flex-end;
+      margin-left: auto;
       color: #9ef;
     }
 
-    .assistant-message p {
-      text-align: left;
+    .assistant-message {
+      background-color: #002b3f;
+      align-self: flex-start;
       color: #f9f;
     }
 
     #user-input {
       width: 100%;
       resize: none;
-      padding: 0.5em;
+      padding: 0.75em;
       font-size: 1em;
-      border: none;
+      border: 1px solid #00ffff;
       border-radius: 4px;
       background: #222;
       color: #eee;
@@ -62,8 +75,8 @@
     #send-button {
       margin-top: 0.5em;
       padding: 0.5em 1em;
-      background: #444;
-      color: #eee;
+      background: #87ceeb;
+      color: #000;
       border: none;
       border-radius: 4px;
       cursor: pointer;
@@ -94,15 +107,22 @@
 </head>
 <body>
   <div id="chat-container">
-    <div id="chat-messages"></div>
+    <div id="chat-messages">
+      <div class="message assistant-message">
+        <p>Greetings, mortal. I am Pick of Gods—an oracle woven from shards and symbols. What wisdom do you seek?</p>
+      </div>
+    </div>
+
     <textarea id="user-input" rows="1" placeholder="Speak your query into the ether..."></textarea>
     <button id="send-button">Send</button>
     <div id="typing-indicator"></div>
+
     <footer class="lore-footer">
       <p>Pick of Gods — Ritual Chat Interface © 2025</p>
       <p><em>Shard Registry:</em> <span id="shard-count">1 active shard</span></p>
     </footer>
   </div>
+
   <script type="module" src="./chat.js"></script>
 </body>
 </html>
