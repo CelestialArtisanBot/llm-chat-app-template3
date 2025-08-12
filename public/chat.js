@@ -1,3 +1,6 @@
+import { detectGlyphs } from "./glyphs.js";
+import { logRitualEvent } from "./tracepad.js";
+
 // DOM elements
 const chatMessages = document.getElementById("chat-messages");
 const userInput = document.getElementById("user-input");
@@ -146,15 +149,26 @@ function formatOracleResponse(text) {
 }
 
 /**
- * Detects glyph triggers and lore cues
+ * Detects glyph triggers and logs ritual events
  */
 function registerGlyphTrigger(text) {
-  if (text.toLowerCase().includes("invoke")) {
-    addMessageToChat(
-      "assistant",
-      "⚡ A glyph surge has been detected. Phase shift imminent..."
-    );
-  }
+  const overlays = detectGlyphs(text);
+  overlays.forEach((overlay) => {
+    const glyph = overlay.includes("⟁") ? "⟁" :
+                  overlay.includes("⟊") ? "⟊" :
+                  overlay.includes("⧉") ? "⧉" :
+                  overlay.includes("⟡") ? "⟡" :
+                  overlay.includes("🌌") ? "⟁⟊" : "?";
+
+    addMessageToChat("assistant", overlay);
+
+    logRitualEvent({
+      phase: currentPhase,
+      glyph,
+      message: text,
+      overlay,
+    });
+  });
 }
 
 /**
@@ -163,16 +177,4 @@ function registerGlyphTrigger(text) {
 function updateInputPlaceholder(text) {
   if (text.includes("⟁")) {
     userInput.placeholder = "Speak your glyph-bound truth...";
-  } else if (text.includes("⟊")) {
-    userInput.placeholder = "Offer a fragment to the oracle...";
-  } else {
-    userInput.placeholder = "Speak your query into the ether...";
   }
-}
-
-/**
- * Updates shard count in footer
- */
-function updateShardCount() {
-  shardCountEl.textContent = `${chatHistory.length} active shards`;
-                           }
