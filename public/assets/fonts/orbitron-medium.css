@@ -1,0 +1,9 @@
+/* ⚡ Orbitron Medium — Charge Pulse Phase */
+@font-face {
+  font-family: 'Orbitron';
+  src: url('./Orbitron-Medium.woff2') format('woff2'),
+       url('./Orbitron-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
