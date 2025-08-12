@@ -1,13 +1,9 @@
-/**
- * Pick of Gods Ritual Chat Engine
- * Handles chat UI, glyph-triggered lore overlays, and shard-phase transitions.
- */
-
 // DOM elements
 const chatMessages = document.getElementById("chat-messages");
 const userInput = document.getElementById("user-input");
 const sendButton = document.getElementById("send-button");
 const typingIndicator = document.getElementById("typing-indicator");
+const shardCountEl = document.getElementById("shard-count");
 
 // Chat state
 let chatHistory = [
@@ -26,6 +22,7 @@ const SHARD_PHASES = {
   RESPONSE: "oracle-reflection",
 };
 let currentPhase = SHARD_PHASES.INIT;
+document.body.setAttribute("data-phase", currentPhase);
 
 // Auto-resize textarea
 userInput.addEventListener("input", function () {
@@ -62,6 +59,9 @@ async function sendMessage() {
 
   chatHistory.push({ role: "user", content: message });
   currentPhase = SHARD_PHASES.QUERY;
+  document.body.setAttribute("data-phase", currentPhase);
+  updateInputPlaceholder(message);
+  updateShardCount();
 
   try {
     const assistantMessageEl = document.createElement("div");
@@ -106,7 +106,9 @@ async function sendMessage() {
 
     chatHistory.push({ role: "assistant", content: responseText });
     currentPhase = SHARD_PHASES.RESPONSE;
+    document.body.setAttribute("data-phase", currentPhase);
     registerGlyphTrigger(message);
+    updateShardCount();
   } catch (error) {
     console.error("Error:", error);
     addMessageToChat(
@@ -120,6 +122,7 @@ async function sendMessage() {
     sendButton.disabled = false;
     userInput.focus();
     currentPhase = SHARD_PHASES.INIT;
+    document.body.setAttribute("data-phase", currentPhase);
   }
 }
 
@@ -153,3 +156,23 @@ function registerGlyphTrigger(text) {
     );
   }
 }
+
+/**
+ * Updates input placeholder based on glyphs
+ */
+function updateInputPlaceholder(text) {
+  if (text.includes("⟁")) {
+    userInput.placeholder = "Speak your glyph-bound truth...";
+  } else if (text.includes("⟊")) {
+    userInput.placeholder = "Offer a fragment to the oracle...";
+  } else {
+    userInput.placeholder = "Speak your query into the ether...";
+  }
+}
+
+/**
+ * Updates shard count in footer
+ */
+function updateShardCount() {
+  shardCountEl.textContent = `${chatHistory.length} active shards`;
+                           }
