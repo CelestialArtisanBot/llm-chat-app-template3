@@ -1,35 +1,56 @@
-// 🧾 tracepad.js — Phase Logger & Glyph Trigger
-// 📜 Logs shard-phase transitions and updates font weight via glyph-selector
+// 📜 tracepad.js — Ritual phase tracker and incantation logger
 
-import { getFontWeightByPhase } from './glyph-selector.js';
+let currentPhase = "init";
+const tracepadLog = document.getElementById("tracepad-log");
 
 const tracepad = {
-  log: [],
-  currentPhase: 'init',
-
-  setPhase(newPhase) {
-    this.currentPhase = newPhase;
-    this.log.push({
-      timestamp: Date.now(),
-      phase: newPhase
-    });
-
-    // 🌀 Apply font weight ritual
-    const weight = getFontWeightByPhase(newPhase);
-    document.body.style.fontWeight = weight;
-
-    // 🧙 Optional: emit custom event
-    const event = new CustomEvent('phaseChange', { detail: newPhase });
-    window.dispatchEvent(event);
+  /**
+   * Set the current ritual phase
+   * @param {string} phase
+   */
+  setPhase(phase) {
+    currentPhase = phase;
+    tracepad.logEvent(`🔮 Phase set to "${phase}"`);
   },
 
-  getLog() {
-    return this.log;
+  /**
+   * Get the current ritual phase
+   * @returns {string}
+   */
+  getPhase() {
+    return currentPhase;
   },
 
-  getCurrentPhase() {
-    return this.currentPhase;
-  }
+  /**
+   * Log a user incantation with timestamp and phase
+   * @param {string} spell
+   */
+  logIncantation(spell) {
+    const entry = document.createElement("div");
+    entry.className = "trace-entry";
+    entry.textContent = `🗣️ Incantation: "${spell}" @ ${new Date().toLocaleTimeString()} [${currentPhase}]`;
+    tracepadLog.appendChild(entry);
+  },
+
+  /**
+   * Log a generic tracepad event
+   * @param {string} message
+   */
+  logEvent(message) {
+    const entry = document.createElement("div");
+    entry.className = "trace-entry";
+    entry.textContent = `${message} @ ${new Date().toLocaleTimeString()} [${currentPhase}]`;
+    tracepadLog.appendChild(entry);
+  },
+
+  /**
+   * Clear the tracepad log and reset phase
+   */
+  clear() {
+    tracepadLog.innerHTML = "";
+    currentPhase = "init";
+    tracepad.logEvent("🧹 Tracepad cleared");
+  },
 };
 
 export default tracepad;
